@@ -28,6 +28,9 @@
   And the answer was: `~/Library/Containers/com`
 
   From [Where are the mounted disks located? | CloudMounter | FAQ](https://cloudmounter.net/faq/where-are-the-mounted-disks-located/#:~:text=Disks%20mounted%20with%20CloudMounter%20are,~%2FLibrary%2FContainers%2Fcom.)
+  * LINUX Commands
+    * `sed`: [Sed Command in Linux/Unix with examples | Geeks for Geeks](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/)
+    * `awk`: [Awk command in Linux/Unix with examples | Geeks for Geeks](https://www.geeksforgeeks.org/awk-command-unixlinux-examples/)
 
   # Appendix
   ### Using sed and awk to create index-of-simplewiki-latest.md from index-of-simplewiki-latest.html
