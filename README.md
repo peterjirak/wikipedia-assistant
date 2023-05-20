@@ -28,3 +28,12 @@
   And the answer was: `~/Library/Containers/com`
 
   From [Where are the mounted disks located? | CloudMounter | FAQ](https://cloudmounter.net/faq/where-are-the-mounted-disks-located/#:~:text=Disks%20mounted%20with%20CloudMounter%20are,~%2FLibrary%2FContainers%2Fcom.)
+
+  # Appendix
+  ### Using sed and awk to create index-of-simplewiki-latest.md from index-of-simplewiki-latest.html
+
+  First I trimmed off everything above the body tag and below the closing body tag, giving me rows of links, filenames, dates, times, and size. Then I executed the following from the command line:
+
+  `cat index-of-simplewiki-latest.html| sed 's/<a href="//' | sed 's/">/ /' | sed 's/<\/a\>/ /' | awk '{print "| [" $1 "](https://dumps.wikimedia.org/simplewiki/latest/" $1 ") | " $3 " | " $4 " | " $ 5 " |"  }' > index-of-simplewiki-latest.md`
+
+  After that I edited `index-of-simplewiki-latest.md`, adding a header row and the row that separates the header row from the body rows in a table.
