@@ -16,3 +16,4 @@
  * [Markdown Guide](https://www.markdownguide.org/)
     * [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/)
     * [Markdown Extended Syntax](https://www.markdownguide.org/extended-syntax/)
+ * [How do I undo the most recent local commits in Git? | StackOverflow](https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git)
