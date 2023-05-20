@@ -1,0 +1,33 @@
+{
+    "DBEngineVersions": [
+        {
+            "Engine": "mysql",
+            "EngineVersion": "8.0.32",
+            "DBParameterGroupFamily": "mysql8.0",
+            "DBEngineDescription": "MySQL Community Edition",
+            "DBEngineVersionDescription": "MySQL 8.0.32",
+            "ValidUpgradeTarget": [],
+            "ExportableLogTypes": [
+                "audit",
+                "error",
+                "general",
+                "slowquery"
+            ],
+            "SupportsLogExportsToCloudwatchLogs": true,
+            "SupportsReadReplica": true,
+            "SupportedFeatureNames": [],
+            "Status": "available",
+            "SupportsParallelQuery": false,
+            "SupportsGlobalDatabases": false,
+            "MajorEngineVersion": "8.0",
+            "SupportsBabelfish": false,
+            "SupportsCertificateRotationWithoutRestart": true,
+            "SupportedCACertificateIdentifiers": [
+                "rds-ca-2019",
+                "rds-ca-ecc384-g1",
+                "rds-ca-rsa4096-g1",
+                "rds-ca-rsa2048-g1"
+            ]
+        }
+    ]
+}
