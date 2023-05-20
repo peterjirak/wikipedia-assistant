@@ -1,18 +1,27 @@
 # lynx-analytics-wikipedia-assistant
 
-## Table of contents
+# Table of contents
 
-### Directories
+## Directories
 | Name | Description                                                                                                                                     |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | docs | This directory contains documentation for this project, including the problem assignment that describes the problem we are solving.             |
 | data | This directory contains the downloads of table extracts from [https://dumps.wikimedia.org/simplewiki/](https://dumps.wikimedia.org/simplewiki/) |
-### Files
+## Files
 | Name                                                       | Description                                                        |
 |------------------------------------------------------------|--------------------------------------------------------------------|
 | docs/Wikipedia_assignment_for_Senior_Software_Engineer.pdf | This file describes in English the problem we are trying to solve. |
 
-## Links and References
+# Topics
+
+## Accessing your database instance
+Okay, I created a Amazon Aurora MySQ: database to use for this project. To simplify things I made my database instance publicly available. I am trying to figure out how to connect to my local computer to my database instance and I am struggling a bit. If I can't make this work, I may create an EC2 for that purpose.
+
+### Links and References
+
+* [Using SSL/TLS to encrypt a connection to a DB instance | AWS Documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+
+# Links and References
 * Markdown
   * [Markdown Guide](https://www.markdownguide.org/)
     * [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/)
@@ -46,6 +55,16 @@
 
 This command yields a JSON with detailed information on one's RDS instances
 
+# ISSUES
+
+## Accessing a publicly available Amazon Aurora MySQL database
+
+# TODOs
+
+## Find an alternative to using an access key and secret access key to run the aws command-line utility as root user
+
+I followed the instructions in the video [Install the AWS CLI on Mac OS // How to download, install, and configure the AWS CLI (V2) by Dennis Traub | YouTube](https://www.youtube.com/watch?v=BNH4i7CQ4Oc) once complete I had and was able to use the aws command-line utility. However, I was doing so as my root user. This is strongly discouraged. Thus one of my TODOs is find an alternative to using the access key and secret access key of the root user for using the AWS command-line tool.
+
   # Appendix
   ### Using sed and awk to create index-of-simplewiki-latest.md from index-of-simplewiki-latest.html
 
@@ -55,8 +74,10 @@ This command yields a JSON with detailed information on one's RDS instances
 
   After that I edited `index-of-simplewiki-latest.md`, adding a header row and the row that separates the header row from the body rows in a table.
 
-# TODOs
+### Using the dig command to verify a DNS or FQDN
 
-## Find an alternative to using an access key and secret access key to run the aws command-line utility as root user
+**Link:** [dig man page](https://linux.die.net/man/1/dig)
 
-I followed the instructions in the video [Install the AWS CLI on Mac OS // How to download, install, and configure the AWS CLI (V2) by Dennis Traub | YouTube](https://www.youtube.com/watch?v=BNH4i7CQ4Oc) once complete I had and was able to use the aws command-line utility. However, I was doing so as my root user. This is strongly discouraged. Thus one of my TODOs is find an alternative to using the access key and secret access key of the root user for using the AWS command-line tool.
+One can use dig to verify a DNS or FQDN. My database uses the endpoint lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.co. I wanted to verify that endpoint. I did so with the `dig` command:
+
+`dig lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.com`
