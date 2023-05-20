@@ -1,0 +1,138 @@
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "lynx-analytics-wikipedia-assisstant-instance-1",
+            "DBInstanceClass": "db.r5.large",
+            "Engine": "aurora-mysql",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "Endpoint": {
+                "Address": "lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.com",
+                "Port": 3306,
+                "HostedZoneId": "Z2R2ITUGPM61AM"
+            },
+            "AllocatedStorage": 1,
+            "InstanceCreateTime": "2023-05-20T05:26:07.704000+00:00",
+            "PreferredBackupWindow": "08:31-09:01",
+            "BackupRetentionPeriod": 1,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-25c54d71",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.aurora-mysql5.7",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "us-east-1c",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "default-vpc-51633b2b",
+                "DBSubnetGroupDescription": "Created from the RDS Management Console",
+                "VpcId": "vpc-51633b2b",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-ba8c4db4",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1f"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-43ede124",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-60111b4e",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-927f77ce",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1d"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-ef91c2d1",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1e"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-7da17e30",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1c"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "thu:06:19-thu:06:49",
+            "PendingModifiedValues": {},
+            "MultiAZ": false,
+            "EngineVersion": "5.7.mysql_aurora.2.11.2",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "general-public-license",
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:aurora-mysql-5-7",
+                    "Status": "in-sync"
+                }
+            ],
+            "PubliclyAccessible": true,
+            "StorageType": "aurora",
+            "DbInstancePort": 0,
+            "DBClusterIdentifier": "lynx-analytics-wikipedia-assisstant",
+            "StorageEncrypted": true,
+            "KmsKeyId": "arn:aws:kms:us-east-1:075754515268:key/decc4fd3-c50e-4383-92c9-1231ac69c2ff",
+            "DbiResourceId": "db-C7I255QMI2NUKPHXU4EKYIV4JA",
+            "CACertificateIdentifier": "rds-ca-2019",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 60,
+            "EnhancedMonitoringResourceArn": "arn:aws:logs:us-east-1:075754515268:log-group:RDSOSMetrics:log-stream:db-C7I255QMI2NUKPHXU4EKYIV4JA",
+            "MonitoringRoleArn": "arn:aws:iam::075754515268:role/rds-monitoring-role",
+            "PromotionTier": 1,
+            "DBInstanceArn": "arn:aws:rds:us-east-1:075754515268:db:lynx-analytics-wikipedia-assisstant-instance-1",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "PerformanceInsightsEnabled": true,
+            "PerformanceInsightsKMSKeyId": "arn:aws:kms:us-east-1:075754515268:key/decc4fd3-c50e-4383-92c9-1231ac69c2ff",
+            "PerformanceInsightsRetentionPeriod": 7,
+            "DeletionProtection": false,
+            "AssociatedRoles": [],
+            "TagList": [
+                {
+                    "Key": "devops-guru-default",
+                    "Value": "lynx-analytics-wikipedia-assisstant"
+                }
+            ],
+            "CustomerOwnedIpEnabled": false,
+            "BackupTarget": "region",
+            "NetworkType": "IPV4",
+            "StorageThroughput": 0,
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-2019",
+                "ValidTill": "2024-08-22T17:08:50+00:00"
+            }
+        }
+    ]
+}
