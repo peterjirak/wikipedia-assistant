@@ -5,3 +5,4 @@ data-unmodified/simplewiki-latest-categorylinks.sql
 data-unmodified/simplewiki-latest-page.sql
 data-unmodified/simplewiki-latest-pagelinks.sql
 data/*.sql
+*.pem
