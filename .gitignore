@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
+*.swo
 data-unmodified/simplewiki-latest-category.sql
 data-unmodified/simplewiki-latest-categorylinks.sql
 data-unmodified/simplewiki-latest-page.sql
