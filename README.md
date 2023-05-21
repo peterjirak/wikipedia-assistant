@@ -82,6 +82,8 @@ This command yields a JSON with detailed information on one's RDS instances
 
 ## Accessing a publicly available Amazon Aurora MySQL database
 
+I created my Amazon Aurora MySQL serverless database without difficulty. However, I had a very difficult time trying to connect from my laptop to that database. I spent a lot of time looking through documentation and trying to figure it out. In the end I created an EC2 t2.micro and used it to set up a tunnel allowing me to connect to my database from my laptop via that EC2 t2.micro.
+
 # TODOs
 
 ## Find an alternative to using an access key and secret access key to run the aws command-line utility as root user
@@ -89,13 +91,21 @@ This command yields a JSON with detailed information on one's RDS instances
 I followed the instructions in the video [Install the AWS CLI on Mac OS // How to download, install, and configure the AWS CLI (V2) by Dennis Traub | YouTube](https://www.youtube.com/watch?v=BNH4i7CQ4Oc) once complete I had and was able to use the aws command-line utility. However, I was doing so as my root user. This is strongly discouraged. Thus one of my TODOs is find an alternative to using the access key and secret access key of the root user for using the AWS command-line tool.
 
   # Appendix
-  ### Using sed and awk to create index-of-simplewiki-latest.md from index-of-simplewiki-latest.html
+  ## Using sed and awk to create index-of-simplewiki-latest.md from index-of-simplewiki-latest.html
 
   First I trimmed off everything above the body tag and below the closing body tag, giving me rows of links, filenames, dates, times, and size. Then I executed the following from the command line:
 
   `cat index-of-simplewiki-latest.html| sed 's/<a href="//' | sed 's/">/ /' | sed 's/<\/a\>/ /' | awk '{print "| [" $1 "](https://dumps.wikimedia.org/simplewiki/latest/" $1 ") | " $3 " | " $4 " | " $ 5 " |"  }' > index-of-simplewiki-latest.md`
 
   After that I edited `index-of-simplewiki-latest.md`, adding a header row and the row that separates the header row from the body rows in a table.
+
+## My tunnel to permit me to connect to my Amazon Aurora MySQL database from my laptop. I ran this ssh command on my laptop:
+
+`ssh -N -L 3669:lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/certificates-and-credentials/lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database.pem`
+
+After that I could connect to my database using the host `127.0.0.1` and the port `3669`
+
+This is a work-around.
 
 ### Using the dig command to verify a DNS or FQDN
 
