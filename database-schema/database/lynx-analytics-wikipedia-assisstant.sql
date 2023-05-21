@@ -1,0 +1,1 @@
+CREATE DATABASE lynx_analytics_wikipedia_assistant;
