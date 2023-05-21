@@ -15,8 +15,8 @@ async def root():
     query_result = await connection.execute(text('show tables'))
     for row in query_result:
         print(f'type(row): {type(row)}')
-        tables.append(f'{row}')
-    print(tables)
+        for value in row:
+            tables.append(value)
 #    print(f'type(query_result): {type(query_result)}')
 #    print(query_result.all())
     
