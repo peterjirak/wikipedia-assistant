@@ -1,18 +1,23 @@
 import sqlalchemy
 from sqlalchemy import text
+from sqlalchemy.ext.asyncio import create_async_engine
 from fastapi import APIRouter
-from app.db_config import get_db_config
+from app.db_connection_url import get_db_connection_url
 
 router = APIRouter()
 
 @router.get("/")
 async def root():
     tables = []
-    connection_info = get_db_config()
-    engine = sqlalchemy.create_engine(f"mysql+pymysql://{connection_info['user']}:{connection_info['password']}@{connection_info['host']}:{connection_info['port']}/{connection_info['database']}?charset=utf8mb4")
-
-    with engine.connect() as connection:
-        query_result = connection.execute(text('show tables'));
-    tables = query_result.all()
-
-    return {"tables": tables}
+    db_url = get_db_connection_url()
+    engine = create_async_engine(db_url)
+    connection = await engine.connect()
+    query_result = await connection.execute(text('show tables'))
+    for row in query_result:
+        print(f'type(row): {type(row)}')
+        tables.append(f'{row}')
+    print(tables)
+#    print(f'type(query_result): {type(query_result)}')
+#    print(query_result.all())
+    
+    return {"message": tables}
