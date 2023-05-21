@@ -114,3 +114,25 @@ This is a work-around.
 One can use dig to verify a DNS or FQDN. My database uses the endpoint lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.co. I wanted to verify that endpoint. I did so with the `dig` command:
 
 `dig lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.com`
+
+## Using sed to uncomment out code in the SQL dump files
+
+Per the suggestion in the programming assignment instructions I downloaded the SQL dump files. These consist of the create table statement necessary to create the table and then the insert into statements to populate the t5able. There are a series of optional statements that are commented out. If these are compatible with one's database engine, one can uncomment them out and then execute them. One could do this manually or one could use sed for this purpose. I implemented a sed command to do this:
+
+`cat simplewiki-latest-page.sql | sed 's/^\/\*\![0-9]* //' | sed 's/ \*\/\;$/;/' > simplewiki-latest-page-modified.sql`
+
+## Creating the database tables and populating them with data
+
+I set up an EC2 t2.micro in the AWS ecloud ecosystem. My Ec2 has the IP address `ec2-3-93-185-102.compute-1.amazonaws.com` . It has a PEM file `lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database-t2-micro.pem` .
+
+I set up an SSH tunnel to allow myself to access my Amazon Aurora MySQL database from my laptop. I ran this command on my laptop:
+
+`ssh -N -L 3669:lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/certificates-and-credentials/lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database.pem`
+
+This mapped port `3669` on my laptop to port `3306` on `lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com` (the resolvable IP address for accessing my database) through my EC2 whose IP address is `lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com` .
+
+After that I could use the `mysql` command-line client on my laptop to access my database. I was also able to use the `DBeaver` GUI to work with my database.
+
+I ran this command to populate the database's `page` table with data:
+
+`mysql --user admin --password --port 3669 --host 127.0.0.1 --database lynx_analytics_wikipedia_assistant < /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/data/simplewiki-latest-page-modified.sql`
