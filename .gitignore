@@ -8,3 +8,4 @@ data-unmodified/simplewiki-latest-pagelinks.sql
 data/*.sql
 *.pem
 __pycache__/
+src-code/api/app/db_config.py

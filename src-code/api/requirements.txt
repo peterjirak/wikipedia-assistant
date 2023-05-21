@@ -1,2 +1,8 @@
 fastapi==0.95.2
 uvicorn==0.22.0
+SQLAlchemy==2.0.15
+greenlet==2.0.2
+pymysql==1.0.3
+cffi==1.15.1
+cryptography==40.0.2
+pycparser==2.21
