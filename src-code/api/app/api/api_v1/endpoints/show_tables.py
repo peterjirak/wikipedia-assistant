@@ -17,7 +17,5 @@ async def root():
         print(f'type(row): {type(row)}')
         for value in row:
             tables.append(value)
-#    print(f'type(query_result): {type(query_result)}')
-#    print(query_result.all())
     
     return {"message": tables}
