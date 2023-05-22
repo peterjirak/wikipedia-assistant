@@ -1,4 +1,4 @@
-# Part 1 - Create a database based on the Simple English Wikipedia content.
+# Part 1 - Instructions - Create a database based on the Simple English Wikipedia content
 Create a database based on the Simple English Wikipedia content. There are periodic dumps with the data that you can find [here](https://dumps.wikimedia.org/simplewiki/). And [here](https://meta.wikimedia.org/wiki/Data_dumps/What%27s_available_for_download#Database_tables), you can find a list of the tables and their schema. The tables that are relevant for this assignment are: page, pagelinks and categorylinks. The database should contain the following:
 * Basic metadata for every wiki page:
   * Page title
