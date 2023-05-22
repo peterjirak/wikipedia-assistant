@@ -120,4 +120,3 @@ CREATE TABLE `pagelinks` (
   KEY `pl_namespace` (`pl_namespace`,`pl_title`,`pl_from`),
   KEY `pl_backlinks_namespace` (`pl_from_namespace`,`pl_namespace`,`pl_title`,`pl_from`)
 ) ENGINE=InnoDB DEFAULT CHARSET=binary ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8;
-
