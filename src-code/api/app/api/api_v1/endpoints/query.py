@@ -13,7 +13,6 @@ async def root(query):
         not re.match(r"\S", query) or
         (not re.match(r"\bSELECT\b", query, flags=re.IGNORECASE) and not re.match(r"\bSHOW\b", query, re.IGNORECASE))):
         raise ValueError("Bad call to API endpoint. A valid query was not specified.")
-    print(f'query: {query}')
     matches = []
     db_url = get_db_connection_url()
     engine = create_async_engine(db_url)
