@@ -111,8 +111,16 @@ CREATE TABLE `page` (
   KEY `page_redirect_namespace_len` (`page_is_redirect`,`page_namespace`,`page_len`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1015074 DEFAULT CHARSET=binary;
 
+-- TABLE pagelinks
+-- NOTES
+--  1. I assume that pl_from is a foreign key that references page(page_id) and
+--     that this is the page_id of the page that the link is from.
+--  2. I assume that the pair(pl_namespace, pl_title) is from the pair
+--     page(page_namespace, page_title) and uniquely identifies a page in the
+--     table page abd that that page is the link to page.
+
 CREATE TABLE `pagelinks` (
-  `pl_from` int(8) unsigned NOT NULL DEFAULT '0',
+  `pl_from` int(8) unsigned NOT NULL DEFAULT '0', -- FOREIGN KEY REFERENCES page(page_id) -- this is the page_id of the page that is linked from 
   `pl_namespace` int(11) NOT NULL DEFAULT '0',
   `pl_title` varbinary(255) NOT NULL DEFAULT '',
   `pl_from_namespace` int(11) NOT NULL DEFAULT '0',
@@ -120,3 +128,38 @@ CREATE TABLE `pagelinks` (
   KEY `pl_namespace` (`pl_namespace`,`pl_title`,`pl_from`),
   KEY `pl_backlinks_namespace` (`pl_from_namespace`,`pl_namespace`,`pl_title`,`pl_from`)
 ) ENGINE=InnoDB DEFAULT CHARSET=binary ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8;
+
+-- The four tables above are directly from the SQL dumps of the data from the
+-- source database.
+--
+-- Part 2B of the programming states to create an endpoint in the API that takes
+-- in a category and returns the most outdated page for that category.
+--
+-- A page is called outdated if at least one of the pages it refers to was
+-- modified later than the page itself. The measure of this outdatedness is the
+-- biggest difference between the last modification of a referred page and the
+-- last modification of the page. This query can be a bit slow, so you should
+-- precompute the results for the top 10 categories with more pages. You can assume
+-- that this endpoint will only be called with one of the top 10 categories.
+--
+-- So while the four tables above are directly from the SQL dumps of the source
+-- databases, the tables below this comment section are the one's I implemented
+-- to solve part 2B of the programming assignment. As well as any INSERT SQL
+-- statements, etc.
+
+CREATE TABLE `ten_category_with_most_pages` (
+  `cat_id` int(10) unsigned NOT NULL,
+  `cat_title` varbinary(255) NOT NULL,
+  `cat_pages` int(11) NOT NULL,
+  `cat_subcats` int(11) NOT NULL,
+  `cat_files` int(11) NOT NULL,
+  PRIMARY KEY (`cat_id`),
+  UNIQUE KEY `cat_title` (`cat_title`),
+  KEY `cat_pages` (`cat_pages`)
+) ENGINE=InnoDB DEFAULT CHARSET=binary;
+
+INSERT INTO ten_category_with_most_pages(cat_id, cat_title, cat_pages, cat_subcats, cat_files)
+    SELECT cat_id, cat_title, cat_pages, cat_subcats, cat_files
+    FROM category
+    ORDER BY cat_pages DESC
+    LIMIT 10;
