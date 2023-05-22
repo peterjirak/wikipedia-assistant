@@ -9,3 +9,4 @@ data/*.sql
 *.pem
 __pycache__/
 src-code/api/app/db_connection_url.py
+src-code/api/app/api/api_v1/endpoints/table-obsolete.py
