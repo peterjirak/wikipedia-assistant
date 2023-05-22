@@ -18,6 +18,10 @@
             "DBSecurityGroups": [],
             "VpcSecurityGroups": [
                 {
+                    "VpcSecurityGroupId": "sg-044201c77d2c40bba",
+                    "Status": "active"
+                },
+                {
                     "VpcSecurityGroupId": "sg-25c54d71",
                     "Status": "active"
                 }
