@@ -14,7 +14,6 @@ async def root():
     connection = await engine.connect()
     query_result = await connection.execute(text('show tables'))
     for row in query_result:
-        print(f'type(row): {type(row)}')
         for value in row:
             tables.append(value)
     
