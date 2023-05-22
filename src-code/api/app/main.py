@@ -5,6 +5,7 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 from fastapi import FastAPI
 from app.db_connection_url import get_db_connection_url
+from app.api.api_v1.api import router as api_router
 
 app = FastAPI()
 
@@ -37,3 +38,5 @@ async def get_row_count_for_table(table_name):
 
     
     return {"message": row_count}
+
+app.include_router(api_router, prefix="/api/v1")
