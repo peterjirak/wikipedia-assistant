@@ -111,14 +111,6 @@ CREATE TABLE `page` (
   KEY `page_redirect_namespace_len` (`page_is_redirect`,`page_namespace`,`page_len`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1015074 DEFAULT CHARSET=binary;
 
--- TABLE pagelinks
--- NOTES
---  1. I assume that pl_from is a foreign key that references page(page_id) and
---     that this is the page_id of the page that the link is from.
---  2. I assume that the pair(pl_namespace, pl_title) is from the pair
---     page(page_namespace, page_title) and uniquely identifies a page in the
---     table page abd that that page is the link to page.
-
 CREATE TABLE `pagelinks` (
   `pl_from` int(8) unsigned NOT NULL DEFAULT '0', -- FOREIGN KEY REFERENCES page(page_id) -- this is the page_id of the page that is linked from 
   `pl_namespace` int(11) NOT NULL DEFAULT '0',
