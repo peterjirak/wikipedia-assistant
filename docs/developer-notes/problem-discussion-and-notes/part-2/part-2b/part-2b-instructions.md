@@ -1,0 +1,4 @@
+2. Create an API to query the contents of the database. The API has to expose two endpoints:
+
+   B. An end point that receives a category and returns the *most outdated* page for that category. A page is called outdated if at least one of the pages it refers to was modified later than the page itself. The measure of this outdatedness is the biggest difference between the last modification of a referred page and the last modification of the page. This query can be a bit slow, so you should precompute the results for the top 10 categories with more pages. You can assume that this endpoint will only be called with one of the top 10 categories.
+   
