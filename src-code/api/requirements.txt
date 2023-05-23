@@ -8,3 +8,4 @@ cryptography==40.0.2
 pycparser==2.21
 asyncmy==0.2.7
 asyncio==3.4.3
+mangum==0.17.0
