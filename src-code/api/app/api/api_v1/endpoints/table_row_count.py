@@ -17,7 +17,7 @@ async def root(table_name):
     table_name = table_name.strip()
     if re.match(r"[^A-Za-z0-9_-]", table_name):
         raise ValueError("Bad call to API end point. Table name parameter contains one or more invalid characters.")
-    if len(table_name) > 32:
+    if len(table_name) > 64:
         raise ValueError("Bad call to API end point. A valid table name cannot exceed 32 characters.")
     row_count = 0
     db_url = get_db_connection_url()
