@@ -10,7 +10,7 @@ This part of the programming assignment calls for the engineer to create a datab
 
 Okay, so in this part of the programming assignment I need to create a database and populate it with data. Looking at the SQL dump files after uncompressing them the source database is MySQL. Personally, I think PostGreSQL is superior to MySQL. I think I can make a compelling argument that that is the case. However, porting from MySQL to PostGreSQL is far more fraught with challenges than one might initially expect. I know this from experience. This would increase the time to deliver, increase the complexity, and increase the risk of implementing a defect. Thus, since the source database was MySQL I decided my database would also be MySQL.
 
-Okay, so where and how should I setup my database. Okay, so there is nearly 4GB of data. Also thinking about Lnyx Analytics and modern Cloud Computing, instead of building a MySQL database on my laptop and populating it with data, making it difficult or impossible for anyone with Lynx Analytics, or really anyone other than me to access, why not build the database for this part of the problem in AWS using Amazon's Aurora MySQL database. Aurora MySQL is considered to be serverless, event hough in fact there us a server. I think it is considered to be serverless because the server is transparent, one never works with or accesses the server directly.
+Okay, so where and how should I setup my database. Okay, so there is nearly 4GB of data. Also thinking about modern Cloud Computing, instead of building a MySQL database on my laptop and populating it with data, making it difficult or impossible for anyone other than me to access, why not build the database for this part of the problem in AWS using Amazon's Aurora MySQL database. Aurora MySQL is considered to be serverless, event hough in fact there us a server. I think it is considered to be serverless because the server is transparent, one never works with or accesses the server directly.
 
 So I created a Amazon Aurora MySQL database in AWS. The file [resources/aws-rds-describe-db-instances.json](../../../../resources/aws-rds-describe-db-instances.json) contains the output of the aws command-line command `aws rds describe-db-instances` describing my instance.
 
@@ -23,9 +23,9 @@ So after creating my database instance, I tried to connect to it directly from m
 Here is the command for my ssh tunnel:
 
 ```
-ssh -N -L 3669:lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 \
+ssh -N -L 3669:wikipedia-assistant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 \
     ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com \
-    -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/certificates-and-credentials/lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database.pem
+    -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/WikipediaAssistant/Source_Code/wikipedia-assistant/certificates-and-credentials/wikipedia-assistant-ec2-for-accessing-the-database.pem
 ```
 
 The form for that command is:
@@ -42,9 +42,9 @@ Here is my command for accessing the database using the mysql command-line utili
 
 `mysql --host 127.0.0.1 --user admin --password --port 3669`
 
-Once I was able to access my database I created the database schema lynx_analytics_wikipedia_assistant. Once my database schema existed on my DBMS I was able to access it using the mysql command:
+Once I was able to access my database I created the database schema wikipedia_assistant. Once my database schema existed on my DBMS I was able to access it using the mysql command:
 
-`mysql --host 127.0.0.1 --user admin --password --port 3669 --database lynx_analytics_wikipedia_assistant`
+`mysql --host 127.0.0.1 --user admin --password --port 3669 --database wikipedia_assistant`
 
 *Having successfully set this up and set up an ssh tunnel and being able to access my database, I totally felt like a rock star. I would have felt like more of a rock star had I managed this in a little more timely fashion. I spent a lot of time trying to gain direct access frm my laptop which is supposed to be possible when one's database is publicly accessible which mine is but I could never get tit to work. In reality making the database publicly accessible is just a bad idea. In the future, I would leave it private and do the trick with an EC2 in a VPC security group and an ssh tunnel, that is more secure.*
 
@@ -60,7 +60,7 @@ After downloading the files and adding the compressed SQL files to my repository
 
 Having downloaded the compressed SQL files, having added them to my repository, and having uncommented out the directory directives in those dump files, it was time ot create the four tables and populate them with data in my database. I used the mysql command-line command to do so:
 
-`mysql --host 127.0.0.1 --user admin --password --port 3669 --database lynx_analytics_wikipedia_assistant < DUMP_FILE.sql`
+`mysql --host 127.0.0.1 --user admin --password --port 3669 --database wikipedia_assistant < DUMP_FILE.sql`
 
 I executed the above command four times, once for each table/dump file. After having run those four commands my database had the data in the tables `category`, `categorylinks`, `page`, and `pagelinks` from my dump files and I could proceed.
 
@@ -68,16 +68,16 @@ In addition to creating the Amazon Aurora MySQL database in AWS, creating a data
 
 ```
 CREATE USER 'read_only_user'@'%' IDENTIFIED BY 'REDACTED';
-GRANT SELECT, SHOW VIEW ON lynx_analytics_wikipedia_assistant.* TO 'read_only_user'@'%';
+GRANT SELECT, SHOW VIEW ON wikipedia_assistant.* TO 'read_only_user'@'%';
 ```
 
-My thinking in doing so was multi-fold. Note that the database actually has two endpoints, one of the endpoints provides write+read access and the other only provides read access. I can utilize the read-only endpoint for safety, like in my two API endpoints that query the database. Using the read-only endpoint assures no one can use the API endpoints to modify my database. However, making a read-only user means that regardless of which endpoint gets used, that user cannot modify the database. So it is totally safe to use my read-only user in my two endpoints. Additionally, I can share the PEM file with members of Lynx Analytics, the IP address of my EC2 instance, the read-only user name and password and members of Lynx Analytics can set up ssh tunnels and access my database using the read-only user without any concern that they could unintentionally or intentionally modify my database (I am going to assume lack of malice and such a scenario being unintentional).
+My thinking in doing so was multi-fold. Note that the database actually has two endpoints, one of the endpoints provides write+read access and the other only provides read access. I can utilize the read-only endpoint for safety, like in my two API endpoints that query the database. Using the read-only endpoint assures no one can use the API endpoints to modify my database. However, making a read-only user means that regardless of which endpoint gets used, that user cannot modify the database. So it is totally safe to use my read-only user in my two endpoints. Additionally, I can share the PEM file with anyone I wanted to be able have access to my database, the IP address of my EC2 instance, the read-only user name and password and people I share it with can set up ssh tunnels and access my database using the read-only user without any concern that they could unintentionally or intentionally modify my database (I am going to assume lack of malice and such a scenario being unintentional).
 
 So at the end of step 1 I had:
  * An Amazon Aurora MySQL database in AWS
  * An EC2 that is accessible publicly and able to connect to my database via a VPC security group.
  * The ability to connect from my laptop to the database via an ssh tunnel through that EC2.
- * A database schema named lynx_analytics_wikipedia_assistant in my database.
+ * A database schema named wikipedia_assistant in my database.
  * The four table schema in that database schema -- `category`, `categorylinks`, `page`, `pagelinks`. I created those four tables using the SQL dump files.
  * Each of the four tables was fully populated with data from the four dump files, a total of about 4GB of data.
 

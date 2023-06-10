@@ -31,13 +31,13 @@ The database should contain the following:
 | [docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md](./docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md) | Discusses my solution in detail. |
 | [database-schema/tables.sql](./database-schema/tables.sql) | Contains the table schema for every table in the database |
 
-I discuss my soltion in detail in [docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md](./docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md) . I created an Amazon Aurora MySQL database in my AWS account. I set up a t2.micro EC2 in AWS that has access to my Amaazon Aurora MySQL database. I then set up an SSH tunnel on my laptop that allowed me to use my Amazon Aurora MySQL database.
+I discuss my solution in detail in [docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md](./docs/developer-notes/problem-discussion-and-notes/part-1/part-1-discussion-and-notes.md) . I created an Amazon Aurora MySQL database in my AWS account. I set up a t2.micro EC2 in AWS that has access to my Amazon Aurora MySQL database. I then set up an SSH tunnel on my laptop that allowed me to use my Amazon Aurora MySQL database.
 
 Here is the command I used for that:
 
 ```
-ssh -N -L 3669:lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com \
-        -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/certificates-and-credentials/lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database.pem
+ssh -N -L 3669:wikipedia-assistant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com \
+        -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/WikipediaAssistant/Source_Code/wikipedia-assistant/certificates-and-credentials/wikipedia-assistant-ec2-for-accessing-the-database.pem
 ```
 
 After that I could work with my database using my laptop via mysql command-line utility or the Enterprise Edition of DBeaver. to use mysql I used the command:

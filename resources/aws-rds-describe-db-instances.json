@@ -1,13 +1,13 @@
 {
     "DBInstances": [
         {
-            "DBInstanceIdentifier": "lynx-analytics-wikipedia-assisstant-instance-1",
+            "DBInstanceIdentifier": "wikipedia-assistant-instance-1",
             "DBInstanceClass": "db.r5.large",
             "Engine": "aurora-mysql",
             "DBInstanceStatus": "available",
             "MasterUsername": "admin",
             "Endpoint": {
-                "Address": "lynx-analytics-wikipedia-assisstant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.com",
+                "Address": "wikipedia-assistant-instance-1.cntmuespoc74.us-east-1.rds.amazonaws.com",
                 "Port": 3306,
                 "HostedZoneId": "Z2R2ITUGPM61AM"
             },
@@ -105,7 +105,7 @@
             "PubliclyAccessible": true,
             "StorageType": "aurora",
             "DbInstancePort": 0,
-            "DBClusterIdentifier": "lynx-analytics-wikipedia-assisstant",
+            "DBClusterIdentifier": "wikipedia-assistant",
             "StorageEncrypted": true,
             "KmsKeyId": "arn:aws:kms:us-east-1:075754515268:key/decc4fd3-c50e-4383-92c9-1231ac69c2ff",
             "DbiResourceId": "db-C7I255QMI2NUKPHXU4EKYIV4JA",
@@ -116,7 +116,7 @@
             "EnhancedMonitoringResourceArn": "arn:aws:logs:us-east-1:075754515268:log-group:RDSOSMetrics:log-stream:db-C7I255QMI2NUKPHXU4EKYIV4JA",
             "MonitoringRoleArn": "arn:aws:iam::075754515268:role/rds-monitoring-role",
             "PromotionTier": 1,
-            "DBInstanceArn": "arn:aws:rds:us-east-1:075754515268:db:lynx-analytics-wikipedia-assisstant-instance-1",
+            "DBInstanceArn": "arn:aws:rds:us-east-1:075754515268:db:wikipedia-assistant-instance-1",
             "IAMDatabaseAuthenticationEnabled": false,
             "PerformanceInsightsEnabled": true,
             "PerformanceInsightsKMSKeyId": "arn:aws:kms:us-east-1:075754515268:key/decc4fd3-c50e-4383-92c9-1231ac69c2ff",
@@ -126,7 +126,7 @@
             "TagList": [
                 {
                     "Key": "devops-guru-default",
-                    "Value": "lynx-analytics-wikipedia-assisstant"
+                    "Value": "wikipedia-assistant"
                 }
             ],
             "CustomerOwnedIpEnabled": false,

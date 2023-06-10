@@ -7,7 +7,7 @@ def get_db_config():
         'user': 'USER',
         'password': 'PASSWORD',
         'port': 9999,
-        'database': 'lynx_analytics_wikipedia_assistant'
+        'database': 'wikipedia_assistant'
     }
 
 def get_db_connection_url():

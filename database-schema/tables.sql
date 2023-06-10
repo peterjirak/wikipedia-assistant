@@ -17,8 +17,8 @@
 -- I uncommented out so they would have an effect.
 --
 -- To handle the database portion of the assignment. I set up a database named
--- lynx_analytics_wikipedia_assistant in AWS's Amazon Aurora MySQL. Personally,
--- I think PostGreSQL is superior to MySQL. I think I can reasonably argue that
+-- wikipedia_assistant in AWS's Amazon Aurora MySQL. Personally, I think PostGreSQL
+--- is superior to MySQL. I think I can reasonably argue that
 -- though that is not a part of this assignment. I used MySQL because the
 -- database from which this data was dumped is a MySQL database and porting
 -- from MySQL to PostGreSQL was out of scope and would have increased time and
@@ -29,14 +29,14 @@
 --
 -- To provide myself with access to my Amazon Aurora MySQL database, I created
 -- an EC2, a t2.micro ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com with a
--- PEM file lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database-t2-micro.pem
+-- PEM file wikipedia-assistant-ec2-for-accessing-the-database-t2-micro.pem
 -- that I could access as the ubuntu user. I configured that EC2 to provide it with
 -- access to my database. I then set up a tunnel on my laptop to access
 -- my Amazon Aurora MySQL database via that EC2. Here is the command I used for
 -- that purpose was:
 --
--- ssh -N -L 3669:lynx-analytics-wikipedia-assisstant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com \
---        -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/LynxAnalytics/Source_Code/lynx-analytics-wikipedia-assistant/certificates-and-credentials/lynx-analytics-wikipedia-assisstant-ec2-for-accessing-the-database.pem
+-- ssh -N -L 3669:wikipedia-assistant.cluster-cntmuespoc74.us-east-1.rds.amazonaws.com:3306 ubuntu@ec2-3-93-185-102.compute-1.amazonaws.com \
+--        -i /Users/peterjirak/Desktop/PeterEldritch/PeterEldritch/Projects/WikipediaAssistant/Source_Code/wikipedia-assistant/certificates-and-credentials/wikipedia-assistant-ec2-for-accessing-the-database.pem
 --
 -- After setting up the EC2 and configuring the tunnel using the above SSH command,
 -- I was able to access my database using both the mysql command-line utility and
@@ -52,7 +52,7 @@
 -- and populate them with data.
 --
 -- Command:
--- mysql --user admin --password --port 3669 --host 127.0.0.1 --database lynx_analytics_wikipedia_assistant < DUMP_FILE.sql
+-- mysql --user admin --password --port 3669 --host 127.0.0.1 --database wikipedia_assistant < DUMP_FILE.sql
 --
 -- That above command created each table and populated it with data via my ssh
 -- tunnel through my EC2. Using the --password option caused MySQL to prompt me
