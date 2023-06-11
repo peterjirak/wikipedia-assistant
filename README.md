@@ -40,7 +40,10 @@ Hit this URL on your computer's browser and give it a whirl: [https://www.wikipe
 Thanks for checking out my exercise/demonstration project!
 
 Kind regards,
+
+
 Peter Eldritch
+
 peter.jirak@gmail.com
 
 ![A picture of Peter Eldritch: a smiling, middle-aged gay man with dark, curly hair, spectacles, a full dark beard, a wide-broad nose, and hazel eyes, wearing a tight fitting synthetic black shirt.](./images/peter-eldritch.jpeg)
