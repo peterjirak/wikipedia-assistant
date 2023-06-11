@@ -1,7 +1,7 @@
 # Wikipedia assistant
 This is an exercise and demonstration project I completed. It uses four tables from the Simple English Wikipedia project. You can read the rest of this README for details regarding this exercise/demonstration project. 
 
-n this project I setup four tables from the English Wikipedia project -- category, categorylinks, page, and pagelinks. I load those four tables with data from the Simple English Wikipedia project that I obtained from that project as gzipped SQL dump files.
+In this project I setup four tables from the English Wikipedia project -- category, categorylinks, page, and pagelinks. I load those four tables with data from the Simple English Wikipedia project that I obtained from that project as gzipped SQL dump files.
 
 The goal as described in detail below is to create two API endpoints.
 
