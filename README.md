@@ -1,4 +1,49 @@
 # Wikipedia assistant
+This is an exercise and demonstration project I completed. It uses four tables from the Simple English Wikipedia project. You can read the rest of this README for details regarding this exercise/demonstration project. 
+
+n this project I setup four tables from the English Wikipedia project -- category, categorylinks, page, and pagelinks. I load those four tables with data from the Simple English Wikipedia project that I obtained from that project as gzipped SQL dump files.
+
+The goal as described in detail below is to create two API endpoints.
+
+The first API endpoint that permits the caller to get the results of an arbitrary SQL query - show statements are also supported, so you may perform a "show tables" query and a "show create table TABLE_NAME" query, you may use that query endpoint to see the schema. Calls to insert, delete, alter, etc. are not supported. You may try but you will fail to modify the database using that endpoint. I created a read-only user so that attempts to use that endpoint to modify the database in anyway will fail. I'd prefer it if you found a vulnerability if you didn't destroy, corrupt, add to, delete from, or in any way modify my database, but if you do, no big deal, I can recreate it and add the data back.
+
+The second API endpoint returns information about the most outdated page for a given category. A page is out of date if it links to other pages that have been more recently updated than it has. A page's out-of-datedness is determined by the difference between when the page was updated most recently and the most recently updated page it links to.
+
+In addition to those two endpoints, I created several others.
+
+Here are my endpoints in this project:
+
+| Endpoint Name      | Endpoint                               | Description                                                          |
+|--------------------|----------------------------------------|----------------------------------------------------------------------|
+| CurrentUtcDatetime | `/api/v1/current-utc-datetime/`        | This endpoint returns the current date and time in the UTC timezone. |
+| ShowTables         | `/api/v1/show-tables/`                 | This API endpoint lists the names of the tables in my project.       |
+| Hello              | `/api/v1/hello/{name}`                 | This endpoint returns "Hello, {name}" for the specified name.        |
+| HelloWorld         | `/api/v1/hello-world/`                 | This endpoint returns "Hello, World!"                                |
+| Query              | `/api/v1/query/{query}`                | This endpoint permits the caller to perform and get the results of an arbitrary query run on my database. |
+| TableRowCount      | `/api/v1/table-row-count/{table_name}` | This endpoint returns the result of the query select count(*) from TABLE_NAME . |
+| MostOutOfDatePageForCategory | `/api/v1/most-out-of-date-page-for-category/{category}` | If you execute the query `select * from ten_category_with_most_pages` using the query endpoint, you will see the ten categories with the most number of pages in them. You may use the category title from any of those ten categories to see the most out of date page for that category. |
+
+My project has a MySQL database on the backend. I originally implemented it using AWS's Amazon Aurora relational database service as I reference throughout this project. However, using a database in AWS's Amazon Aurora relational database service was costly, about $7 per day. So while I set it up that way, I eventually set up my own r5.large EC2 running Ubuntu 22.04.1 in US-West-2 (Oregon), installed MySQL on it and set up my database there and deleted the one I had in the Aurora relational database service.
+
+I implemented my endpoints using Python with FastAPI. I then created a second EC2 instance, a t2.micro also running Ubuntu 22.04.1 also in US-West-2 (Oregon). I installed Python 3 with PIP, Fast API, and Uvicorn on that EC2 instance. I configured everything and setup my API on that EC2 instance.
+
+I purchased the domain wikipediaassistant.com .
+
+I obviously want to use HTTPS and not HTTP. That requires a TLS/SSL certificate. To that end I installed Certbot by the Electronic Frontier Foundation and used Certbot to put a valid TLS/SSL certificate on my EC2 identifying my service as the owner of wikipediaassistant.com thereby allowing my service to support HTTPS.
+
+Do you want to try my service out!
+
+I would love for you to do so!
+
+Hit this URL on your computer's endpoint and give it a whirl: [https://www.wikipediaassistant.com/docs](https://www.wikipediaassistant.com/docs)
+
+Thanks for checking out my exercise/demonstration project!
+
+Kind regards,
+Peter Eldritch
+peter.jirak@gmail.com
+
+![A picture of Peter Eldritch: a smiling, middle-aged gay man with dark, curly hair, spectacles, a full dark beard, a wide-broad nose, and hazel eyes, wearing a tight fitting synthetic black shirt.](./images/peter-eldritch.jpeg)
 
 ## Assignment Objective
 Create an API to serve content from the Simple English Wikipedia . The API should expose two endpoints:
@@ -77,7 +122,7 @@ I implemented the API endpoints as instructed in the problem assignment using Py
 
 Okay, but you want to tested it and try it out. Well, I created that Amazon Aurora MySQL database, it is deployed in the AWS Cloud ecosystem.
 
-But of course you need to utilize my Fast API implementation. How can you do that? Well, my initial plan was to get the entire thing up and running using Almbday and API Gateway. I got close, but couldn't quite manage it in the time I utilized for this project. So, instead I set up a t2.large with 30GB of local storage in the AWS ecosystem. I gave that t2.large access to my Aurora MySQL database. I then installed NGINX as my web server on that t2.large EC2. I installed uvicorn as the application server on that t2.large EC2. I configured NGINX to utilizemy uvicorn application server to handle requests. After I got all that working I set up a domain name in Amazon's AWS Route 53 hosting service. I configured the DNS records necessary to permit my FQDN to resolve to my t2.large EC2 instance, passing requests in that were then received by NGINX and passed along to my uvicorn application server. The given endpoints were then able to query the database as necessary. After all of that I then installed and configured Certbot, so I could have a SSL/TLS certificate and handle HTTPS and even redirect HTTP requests to HTTPS.
+But of course you need to utilize my Fast API implementation. How can you do that? Well, my initial plan was to get the entire thing up and running using Almbday and API Gateway. I got close, but couldn't quite manage it in the time I utilized for this project. So, instead I set up a t2.large with 30GB of local storage in the AWS ecosystem. I gave that t2.large access to my Aurora MySQL database. I then installed NGINX as my web server on that t2.large EC2. I installed uvicorn as the application server on that t2.large EC2. I configured NGINX to utilize my uvicorn application server to handle requests. After I got all that working I set up a domain name in Amazon's AWS Route 53 hosting service. I configured the DNS records necessary to permit my FQDN to resolve to my t2.large EC2 instance, passing requests in that were then received by NGINX and passed along to my uvicorn application server. The given endpoints were then able to query the database as necessary. After all of that I then installed and configured Certbot, so I could have a SSL/TLS certificate and handle HTTPS and even redirect HTTP requests to HTTPS.
 
 So, how can you evaluate and test my work? I mean you can see everything I did here in this repository, but how to test and evaluate it?
 
