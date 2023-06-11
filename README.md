@@ -35,7 +35,7 @@ Do you want to try my service out!
 
 I would love for you to do so!
 
-Hit this URL on your computer's endpoint and give it a whirl: [https://www.wikipediaassistant.com/docs](https://www.wikipediaassistant.com/docs)
+Hit this URL on your computer's browser and give it a whirl: [https://www.wikipediaassistant.com/docs](https://www.wikipediaassistant.com/docs)
 
 Thanks for checking out my exercise/demonstration project!
 
